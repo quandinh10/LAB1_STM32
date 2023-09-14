@@ -108,17 +108,17 @@ int main(void)
   MX_GPIO_Init();
  800015a:	f000 f863 	bl	8000224 <MX_GPIO_Init>
   /* USER CODE BEGIN 2 */
-  int timer=2;
- 800015e:	2302      	movs	r3, #2
+  int timer=1;
+ 800015e:	2301      	movs	r3, #1
  8000160:	607b      	str	r3, [r7, #4]
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (timer==2){
+	  if (timer==1){
  8000162:	687b      	ldr	r3, [r7, #4]
- 8000164:	2b02      	cmp	r3, #2
+ 8000164:	2b01      	cmp	r3, #1
  8000166:	d10a      	bne.n	800017e <main+0x32>
 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin,RESET);
  8000168:	2200      	movs	r2, #0
@@ -144,8 +144,8 @@ int main(void)
  800018c:	2140      	movs	r1, #64	; 0x40
  800018e:	4806      	ldr	r0, [pc, #24]	; (80001a8 <main+0x5c>)
  8000190:	f000 fc02 	bl	8000998 <HAL_GPIO_TogglePin>
-	  		 timer=2;
- 8000194:	2302      	movs	r3, #2
+	  		 timer=1;
+ 8000194:	2301      	movs	r3, #1
  8000196:	607b      	str	r3, [r7, #4]
 	  	  }
 	  timer--;
@@ -155,7 +155,7 @@ int main(void)
 	  HAL_Delay(1000);
  800019e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  80001a2:	f000 f95f 	bl	8000464 <HAL_Delay>
-	  if (timer==2){
+	  if (timer==1){
  80001a6:	e7dc      	b.n	8000162 <main+0x16>
  80001a8:	40010800 	.word	0x40010800
 
