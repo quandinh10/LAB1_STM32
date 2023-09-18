@@ -137,7 +137,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  clearALLClock();
+	  if (counter==0) clearNumberOnClock(11);
+	  else clearNumberOnClock(counter-1);
 	  setNumberOnClock(counter);
 	  if (counter>=11) counter=0;
 	  else counter++;
