@@ -98,10 +98,10 @@ int main(void)
 		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin,SET);
 	  }
 	  else if (timer==0){
-	  		 HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-	  		 HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
-	  		 timer=1;
-	  	  }
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
+		  timer=1;
+	  }
 	  timer--;
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
