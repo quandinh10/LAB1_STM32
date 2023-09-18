@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000303a  00000000  00000000  00020035  2**0
+ 12 .debug_info   00002fda  00000000  00000000  00020035  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000e97  00000000  00000000  0002306f  2**0
+ 13 .debug_abbrev 00000e6e  00000000  00000000  0002300f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000003e8  00000000  00000000  00023f08  2**3
+ 14 .debug_aranges 000003d0  00000000  00000000  00023e80  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000360  00000000  00000000  000242f0  2**3
+ 15 .debug_ranges 00000348  00000000  00000000  00024250  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000155b7  00000000  00000000  00024650  2**0
+ 16 .debug_macro  000155b7  00000000  00000000  00024598  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000477b  00000000  00000000  00039c07  2**0
+ 17 .debug_line   0000457b  00000000  00000000  00039b4f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00079985  00000000  00000000  0003e382  2**0
+ 18 .debug_str    00079953  00000000  00000000  0003e0ca  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000b7d07  2**0
+ 19 .comment      00000053  00000000  00000000  000b7a1d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d94  00000000  00000000  000b7d5c  2**2
+ 20 .debug_frame  00000d30  00000000  00000000  000b7a70  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -111,11 +111,11 @@ int main(void)
   int counter=0;
  800015e:	2300      	movs	r3, #0
  8000160:	607b      	str	r3, [r7, #4]
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
   {
-//	  clearALLClock();
-//	  setNumberOnClock(counter);
-//	  if (counter>=11) counter=0;
-//	  else counter++;
 	  if (counter==0) {
  8000162:	687b      	ldr	r3, [r7, #4]
  8000164:	2b00      	cmp	r3, #0
