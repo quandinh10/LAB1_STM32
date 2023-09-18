@@ -129,21 +129,59 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  int counter=0;
+  int sec_counter=60;
+  int min_counter=60;
+  int sec_led=0,min_led=0,hr_led=0;
 
+  int min_flag=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (counter==0) clearNumberOnClock(11);
-	  else clearNumberOnClock(counter-1);
-	  setNumberOnClock(counter);
-	  if (counter>=11) counter=0;
-	  else counter++;
+	  if (sec_counter%5==0 && sec_counter!=60){
+		  sec_led+=1;
 
-	  HAL_Delay(1000);
+		  if (sec_led>=12) sec_led=0;
+		  setNumberOnClock(sec_led);
+
+		  int old_sec_led = (sec_led+11)%12;
+		  if (old_sec_led != min_led && old_sec_led != hr_led){
+			  clearNumberOnClock(old_sec_led);
+		  }
+
+		  if (sec_counter==0){
+			  sec_counter=60;
+			  min_counter--;
+			  min_flag=1;
+		  }
+	  }
+	  if (min_counter%5==0 && min_counter!=60 && min_flag==1){
+		  min_led+=1;
+		  min_flag=0;
+
+		  if (min_led>=12) min_led=0;
+		  setNumberOnClock(min_led);
+
+		  int old_min_led = (min_led+11)%12;
+		  if (old_min_led != sec_led && old_min_led != hr_led){
+			  clearNumberOnClock(old_min_led);
+		  }
+
+		  if (min_counter==0){
+			  min_counter=60;
+			  hr_led+=1;
+
+			  if (hr_led>=12) hr_led=0;
+			  setNumberOnClock(hr_led);
+
+			  if (hr_led != 1) clearNumberOnClock((hr_led+11)%12);
+		  }
+	  }
+
+	  sec_counter--;
+	  HAL_Delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -199,9 +237,12 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED0_Pin|LED1_Pin|LED2_Pin|LED3_Pin
-                          |LED4_Pin|LED5_Pin|LED6_Pin|LED7_Pin
-                          |LED8_Pin|LED9_Pin|LED10_Pin|LED11_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, LED1_Pin|LED2_Pin|LED3_Pin|LED4_Pin
+                          |LED5_Pin|LED6_Pin|LED7_Pin|LED8_Pin
+                          |LED9_Pin|LED10_Pin|LED11_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : LED0_Pin LED1_Pin LED2_Pin LED3_Pin
                            LED4_Pin LED5_Pin LED6_Pin LED7_Pin
