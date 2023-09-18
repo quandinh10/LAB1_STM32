@@ -596,8 +596,8 @@ int main(void)
  80004a8:	69fb      	ldr	r3, [r7, #28]
  80004aa:	3b01      	subs	r3, #1
  80004ac:	61fb      	str	r3, [r7, #28]
-	  HAL_Delay(10);
- 80004ae:	200a      	movs	r0, #10
+	  HAL_Delay(1);
+ 80004ae:	2001      	movs	r0, #1
  80004b0:	f000 f968 	bl	8000784 <HAL_Delay>
 	  if (sec_counter%5==0 && sec_counter!=60){
  80004b4:	e75b      	b.n	800036e <main+0x2a>
