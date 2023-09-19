@@ -129,58 +129,32 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  int sec_counter=60;
-  int min_counter=60;
-  int sec_led=0,min_led=0,hr_led=0;
+  int sec_counter=0;
+  int min_counter=0;
+  int hr_counter=0;
 
-  int min_flag=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (sec_counter%5==0 && sec_counter!=60){
-		  sec_led+=1;
-
-		  if (sec_led>=12) sec_led=0;
-		  setNumberOnClock(sec_led);
-
-		  int old_sec_led = (sec_led+11)%12;
-		  if (old_sec_led != min_led && old_sec_led != hr_led){
-			  clearNumberOnClock(old_sec_led);
-		  }
-
-		  if (sec_counter==0){
-			  sec_counter=60;
-			  min_counter--;
-			  min_flag=1;
-		  }
+	  if (sec_counter == 60){
+		  sec_counter=0;
+		  min_counter++;
 	  }
-	  if (min_counter%5==0 && min_counter!=60 && min_flag==1){
-		  min_led+=1;
-		  min_flag=0;
-
-		  if (min_led>=12) min_led=0;
-		  setNumberOnClock(min_led);
-
-		  int old_min_led = (min_led+11)%12;
-		  if (old_min_led != sec_led && old_min_led != hr_led){
-			  clearNumberOnClock(old_min_led);
-		  }
-
-		  if (min_counter==0){
-			  min_counter=60;
-			  hr_led+=1;
-
-			  if (hr_led>=12) hr_led=0;
-			  setNumberOnClock(hr_led);
-
-			  if (hr_led != 1) clearNumberOnClock((hr_led+11)%12);
-		  }
+	  if (min_counter == 60){
+		  min_counter=0;
+		  hr_counter++;
 	  }
-
-	  sec_counter--;
+	  if (hr_counter == 12){
+		  hr_counter=0;
+	  }
+	  clearALLClock();
+	  setNumberOnClock(sec_counter/5);
+	  setNumberOnClock(min_counter/5);
+	  setNumberOnClock(hr_counter%12);
+	  sec_counter++;
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
