@@ -155,7 +155,7 @@ int main(void)
 	  setNumberOnClock(min_counter/5);
 	  setNumberOnClock(hr_counter%12);
 	  sec_counter++;
-	  HAL_Delay(1000);
+	  HAL_Delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
